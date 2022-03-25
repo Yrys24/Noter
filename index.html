@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+
+            position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url(https://krot.info/uploads/posts/2021-02/thumbs/1612868518_23-p-fon-bloknotnii-list-24.jpg);
+            background-image: none;
+
+        }
+
+
+        div {
+            width: 200px;
+            height: 100px;
+            background-color: rgba(245, 7, 7, 0.384);
+            position: fixed;
+            top: 700px;
+            left: 200px;
+            transition: 3s;
+            border-radius: 20px;
+
+        }
+
+        .ul {
+            font-family: 'Caveat', cursive;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+
+
+        }
+    </style>
+</head>
+<label id="color2" style="margin-left: 80%;"> <input id="color1" type="checkbox" /> Put img </label>
+
+<h1 style="margin-left: 40%;margin-top: 10%;font-family: 'Caveat', cursive;" id="id">Todo list👇 ()</h1>
+<input style="margin-left: 40%;" type="text" id="tex">
+<input type="text" id="qu" placeholder="Search">
+<button type="text" id="dob">Add smth </button>
+<ul class="ul" id="ul"> </ul>
+<div style="font-size: 35px; display: flex; justify-content: center; align-items: center;" id="div"> Write something
+</div>
+
+<body class="body2" id="body1">
+    <script>
+        let dob = document.getElementById('dob');
+        let color1 = document.getElementById('color1');
+        let color2 = document.getElementById('color2');
+        let body1 = document.getElementById('body1');
+        let t = document.getElementById('tex');
+        let div = document.getElementById('div')
+        let id = document.getElementById('id')
+        let ul = document.getElementById('ul')
+        let qu = document.getElementById('qu')
+        let x = 450;
+        let y = 700;
+
+
+
+        if (localStorage.getItem("dark") == "on") {
+            body1.style.backgroundImage = `url(https://krot.info/uploads/posts/2021-02/thumbs/1612868518_23-p-fon-bloknotnii-list-24.jpg)`;
+            color1.checked = true
+        } else {
+            body1.style.backgroundImage = "none"
+
+        }
+
+
+        const todos = [];
+        qu.oninput = () => {
+            ul.innerHTML = ""
+            let p = 0
+            for (let i = 0; i < todos.length; i++) {
+                if (todos[i].startsWith(qu.value)) {
+                    p += 1;
+                    ul.innerHTML += `<li>${todos[i]}</li>`;
+                }
+            }
+            id.innerHTML = qu.value == "" ? ` Todo list👇 (${todos.length})` : ` lists starting with the 👉  ${qu.value} (${p})`;
+            tex.value = "";
+        }
+        t.onkeydown = function (event) {
+            if (event.keyCode === 13) {
+                blaknon();
+            }
+            dob.onclick = blaknon
+            function blaknon() {
+                if (tex.value == "") {
+                    div.style.top = x + 'px'
+                    setTimeout(function () {
+                        div.style.top = y + 'px'
+                    }, 2000);
+                } else {
+                    todos.push(tex.value)
+                    id.innerHTML = ` Todo list👇 (${todos.length})`;
+                    ul.innerHTML += `<li>${tex.value}</li>`;
+                    tex.value = "";
+                }
+
+            }
+
+        }
+    
+        color1.onchange = () => {
+            if (color1.checked == true) {
+                body1.style.backgroundImage = `url(https://krot.info/uploads/posts/2021-02/thumbs/1612868518_23-p-fon-bloknotnii-list-24.jpg)`;
+                color2.style.color = 'white';
+                localStorage.setItem('dark', 'on');
+            } else {
+                body1.style.backgroundImage = 'none';
+                color2.style.color = 'black';
+                localStorage.setItem('dark', 'off');
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>
